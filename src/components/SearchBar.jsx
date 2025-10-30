@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function SearchBar({ onSearch, onUnitChange, currentUnit }) {
-    const [query, setQuery] = useState('');
+function SearchBar({ query, onQueryChange, onSearch, onUnitChange, currentUnit }) {
     const [suggestions, setSuggestions] = useState([]);
     const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
     
@@ -20,15 +19,9 @@ function SearchBar({ onSearch, onUnitChange, currentUnit }) {
             setIsLoadingSuggestions(true);
             setSuggestions([]);
             try {
-                const response = await fetch(
-                    `/api/geo?q=${query}`
-                );
-                
+                const response = await fetch(`/api/geo?q=${query}`);
                 const data = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to fetch suggestions.');
-                }
+                if (!response.ok) throw new Error(data.error || 'Failed to fetch suggestions.');
                 
                 const formattedSuggestions = data.map(city => ({
                     ...city,
@@ -43,16 +36,14 @@ function SearchBar({ onSearch, onUnitChange, currentUnit }) {
             }
         }, 500); 
         return () => {
-            if (debounceTimeoutRef.current) {
-                clearTimeout(debounceTimeoutRef.current);
-            }
+            if (debounceTimeoutRef.current) clearTimeout(debounceTimeoutRef.current);
         };
-    }, [query]); 
+    }, [query]);
 
     useEffect(() => {
         function handleClickOutside(event) {
             if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
-                setSuggestions([]); 
+                setSuggestions([]);
             }
         }
         document.addEventListener("mousedown", handleClickOutside);
@@ -61,11 +52,9 @@ function SearchBar({ onSearch, onUnitChange, currentUnit }) {
         };
     }, [searchBarRef]);
 
-
     const handleSuggestionClick = (city) => {
-        setQuery(city.name);
-        setSuggestions([]); 
         onSearch({ lat: city.lat, lon: city.lon });
+        setSuggestions([]); 
     };
 
     const handleSubmit = (e) => {
@@ -86,7 +75,7 @@ function SearchBar({ onSearch, onUnitChange, currentUnit }) {
                         placeholder="Enter city name..."
                         autoComplete="off"
                         value={query}
-                        onChange={(e) => setQuery(e.target.value)}
+                        onChange={(e) => onQueryChange(e.target.value)}
                     />
                     {(suggestions.length > 0 || isLoadingSuggestions) && query.length >= 3 && (
                         <div id="suggestions-container">

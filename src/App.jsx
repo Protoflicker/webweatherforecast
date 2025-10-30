@@ -16,6 +16,7 @@ function App() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+    const [query, setQuery] = useState('');
 
     useEffect(() => {
         localStorage.setItem('theme', theme);
@@ -26,7 +27,6 @@ function App() {
         setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
     };
 
-
     useEffect(() => {
         const initialCity = history[0] || 'Jakarta';
         setLocation(initialCity);
@@ -34,7 +34,6 @@ function App() {
 
     useEffect(() => {
         if (!location) return;
-
         const getWeatherData = async () => {
             setLoading(true);
             setError(null);
@@ -86,6 +85,11 @@ function App() {
         setHistory([]);
     };
 
+    const handleSearch = (newLocation) => {
+        setLocation(newLocation); 
+        setQuery('');           
+    };
+
     return (
         <>
             <ThemeToggle theme={theme} onToggle={handleThemeToggle} />
@@ -97,7 +101,9 @@ function App() {
                 <main>
                     <section className="search-section">
                         <SearchBar
-                            onSearch={setLocation}
+                            query={query}
+                            onQueryChange={setQuery}
+                            onSearch={handleSearch}
                             onUnitChange={setUnit}
                             currentUnit={unit}
                         />
@@ -106,7 +112,7 @@ function App() {
                              <MapDisplay 
                                 lat={currentWeather.coord.lat}
                                 lon={currentWeather.coord.lon}
-                                onMapClick={setLocation}
+                                onMapClick={handleSearch}
                              />
                         )}
                         {currentWeather && (
@@ -115,7 +121,9 @@ function App() {
                                     Zoom on the map for more accurate location
                                 </p>
                                 <p>
-                                    If the location shown on the weather forecast is not the one you entered or clicked it means the Weather API from OpenWeatherMap doesnt have the data for that location and is giving you the weather forecast for the nearest location
+                                    If the location shown on the weather forecast is not the one you entered or clicked it means 
+                                    the Weather API from OpenWeatherMap doesnt have the data for that location and is giving you 
+                                    the weather forecast for the nearest location
                                 </p>
                             </div>
                         )}
@@ -123,10 +131,11 @@ function App() {
 
                     <SearchHistory
                         history={history}
-                        onHistoryClick={setLocation}
+                        onHistoryClick={handleSearch}
                         onClearHistory={handleClearHistory}
                     />
-
+                    
+                    {/* ... sisa komponen tetap sama ... */}
                     <MessageDisplay loading={loading} error={error} />
                     
                     {currentWeather && (
@@ -139,8 +148,6 @@ function App() {
                         <CurrentWeather data={currentWeather} unit={unit} />
                         <ForecastTable data={forecast} unit={unit} />
                     </div>
-
-                    
                 </main>
                 <footer>
                     <p>123140021</p>
@@ -151,4 +158,3 @@ function App() {
 }
 
 export default App;
-
