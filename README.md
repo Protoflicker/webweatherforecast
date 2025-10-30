@@ -69,12 +69,10 @@ After logging in:
   <img src="ss/5.png" width="600">
 </p> 
 4. Click **Continue**
-
 5. Open the **Environment Variables** section and add Key: OPENWEATHER_API_KEY and Value: (Your API Key from OpenWeatherMap)
 <p align="center">
   <img src="ss/6.png" width="600">
 </p>
-
 6. Click **Deploy**.
 Once the build process is complete, click **Visit** or use the generated domain link to open your deployed site.
 <p align="center">
