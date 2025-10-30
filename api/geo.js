@@ -1,8 +1,7 @@
 export default async function handler(req, res) {
-    // Parameter query sekarang ada di req.query
     const { q } = req.query;
     
-    // Ambil API key dari Environment Variable di Vercel
+ 
     const API_KEY = process.env.OPENWEATHER_API_KEY;
 
     if (!q) {
@@ -20,7 +19,6 @@ export default async function handler(req, res) {
 
         const data = await response.json();
         
-        // Kirim data kembali ke client menggunakan res.json()
         return res.status(200).json(data);
 
     } catch (error) {

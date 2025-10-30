@@ -1,11 +1,6 @@
-// api/weather.js
-// Menggunakan format Node.js (handler) yang lebih kompatibel
-
 export default async function handler(req, res) {
-    // Parameter query sekarang ada di req.query
     const { unit = 'metric', lat, lon, q } = req.query;
     
-    // Ambil API key dari Environment Variable di Vercel
     const API_KEY = process.env.OPENWEATHER_API_KEY;
 
     let weatherUrl, forecastUrl;
@@ -36,7 +31,6 @@ export default async function handler(req, res) {
             forecast: forecastData,
         };
         
-        // Kirim data kembali ke client menggunakan res.json()
         return res.status(200).json(result);
 
     } catch (error) {
