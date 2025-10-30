@@ -64,16 +64,15 @@ After logging in:
 <p align="center">
   <img src="ss/4.png" width="600">
 </p> 
-3. Paste this repository URL (https://github.com/Protoflicker/webweatherforecast) into the import field:
+3. Paste this repository URL (https://github.com/Protoflicker/webweatherforecast) into the import field and click **Continue**:
 <p align="center">
   <img src="ss/5.png" width="600">
 </p> 
-4. Click **Continue**
-5. Open the **Environment Variables** section and add Key: OPENWEATHER_API_KEY and Value: (Your API Key from OpenWeatherMap)
+4. Open the **Environment Variables** section and add Key: OPENWEATHER_API_KEY and Value: (Your API Key from OpenWeatherMap)
 <p align="center">
   <img src="ss/6.png" width="600">
 </p>
-6. Click **Deploy**.
+5. Click **Deploy**.
 Once the build process is complete, click **Visit** or use the generated domain link to open your deployed site.
 <p align="center">
 <img src="ss/7.png" width="600">
