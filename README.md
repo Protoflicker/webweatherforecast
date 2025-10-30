@@ -8,7 +8,7 @@ This application displays real-time weather data, a 5-day forecast, and an inter
 ## Author
 
 **Name:** Adi Septriansyah  
-**Student ID:** 123140021  
+**NIM:** 123140021  
 
 **Deployment Link:** [https://webweatherforecast.vercel.app/](https://webweatherforecast.vercel.app/)
 
