@@ -68,7 +68,7 @@ After logging in:
 <p align="center">
   <img src="ss/5.png" width="600">
 </p> 
-4. Click **Continue**.  
+4. Click **Continue**.
 5. Open the **Environment Variables** section and add:
 Key: OPENWEATHER_API_KEY
 Value: (Your API Key from OpenWeatherMap)
