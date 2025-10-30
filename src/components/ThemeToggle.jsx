@@ -47,7 +47,7 @@ function ThemeToggle({ theme, onToggle }) {
         <button 
             className="theme-toggle-icon-btn" 
             onClick={onToggle}
-            title={theme === 'light' ? 'Ganti ke Dark Mode' : 'Ganti ke Light Mode'}
+            title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}
         >
             {theme === 'light' ? <MoonIcon /> : <SunIcon />}
         </button>
